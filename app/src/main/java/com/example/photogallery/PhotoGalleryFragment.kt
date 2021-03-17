@@ -1,9 +1,6 @@
 package com.example.photogallery
 
-
-import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
@@ -11,21 +8,11 @@ import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
-import api.FlickrApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val TAG = "PhotoGalleryFragment"
@@ -205,11 +192,6 @@ class PhotoGalleryFragment() : VisibleFragment() {
         override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
             val galleryItem = galleryItems[position]
             holder.bindGalleryItem(galleryItem)
-            val placeholder: Drawable = ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.bill_up_close
-            ) ?: ColorDrawable()
-            holder.bindDrawable(placeholder)
             thumbnailDownloader.queueThumbnail(holder, galleryItem.url)
         }
     }
